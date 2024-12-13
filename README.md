@@ -1,5 +1,15 @@
 # apigee-camara-staging
 
+## <a name="camara-samples"></a>CAMARA Samples with Apigee
+
+|     | Sample                                               | Description              | Cloud Shell Tutorial |
+| --- | ---------------------------------------------------- | ------------------------ | -------------------- |
+| 1   | [sim-swap](sim-swap)                                 | Sim-Swap                 | TBD                  |
+| 2   | [location-verification](location-verification)       | Location Verification    | TBD                  |
+| 3   | [kyc-match](kyc-match)                               | KYC Match                | TBD                  |
+| 4   | [CIBA](cibra)                                        | CIBA Standard for CAMARA | TBD                  |
+| 5   | [interoperability-profile](interoperability-profile) | Interoperability Profile | TBD                  |
+
 ## <a name="ask"></a>Ask questions on the Community Forum
 
 [The Apigee Forum](https://www.googlecloudcommunity.com/gc/Apigee/bd-p/cloud-apigee) on the [Google Cloud Community site](https://www.googlecloudcommunity.com/) is a great place to ask questions and find answers about developing API proxies.
