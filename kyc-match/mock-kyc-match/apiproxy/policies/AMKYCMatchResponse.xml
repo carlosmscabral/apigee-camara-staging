@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AssignMessage continueOnError="false" enabled="true" name="AMKYCMatchResponse">
+    <DisplayName>AM.KYCMatchResponse</DisplayName>
+    <Set>
+        <Payload contentType="application/json">
+{
+  "idDocumentMatch": "not_available",
+  "nameMatch": "true",
+  "givenNameMatch": "true",
+  "familyNameMatch": "true",
+  "nameKanaHankakuMatch": "not_available",
+  "nameKanaZenkakuMatch": "not_available",
+  "middleNamesMatch": "true",
+  "familyNameAtBirthMatch": "not_available",
+  "addressMatch": "true",
+  "streetNameMatch": "true",
+  "streetNumberMatch": "true",
+  "postalCodeMatch": "true",
+  "regionMatch": "true",
+  "localityMatch": "true",
+  "countryMatch": "not_available",
+  "houseNumberExtensionMatch": "not_available",
+  "birthdateMatch": "false",
+  "birthdateMatchScore": 87,
+  "emailMatch": "not_available",
+  "genderMatch": "not_available"
+}
+        </Payload>
+    </Set>
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+    <AssignTo createNew="false" transport="http" type="request"/>
+</AssignMessage>

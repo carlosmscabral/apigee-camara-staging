@@ -1,0 +1,30 @@
+<APIProxy revision="43" name="camara-ciba">
+    <DisplayName></DisplayName>
+    <Description></Description>
+    <CreatedAt>1734087018795</CreatedAt>
+    <LastModifiedAt>1734087018795</LastModifiedAt>
+    <BasePaths>/openIDConnectCIBA/v1</BasePaths>
+    <Policies>
+        <Policy>RFInvalidBCAuthRequest</Policy>
+        <Policy>validate-request-10js</Policy>
+        <Policy>BAExtractClientId</Policy>
+        <Policy>AEGetAPIProductScopes</Policy>
+        <Policy>VKAuthorizeRequest</Policy>
+        <Policy>JSValidateScope</Policy>
+        <Policy>OAuthGenerateAuthorizationCode</Policy>
+        <Policy>AMApigeeAuthRequest</Policy>
+        <Policy>AMAssignBCAuthorizeResponse</Policy>
+        <Policy>OAuthGenerateAccessToken</Policy>
+        <Policy>AMBCTokenRequest</Policy>
+        <Policy>RFMissingMandatoryParameters</Policy>
+        <Policy>JSValidateTokenRequest</Policy>
+    </Policies>
+    <ProxyEndpoints>
+        <ProxyEndpoint>default</ProxyEndpoint>
+    </ProxyEndpoints>
+    <Resources>
+        <Resource>jsc://validate-request-1.0.js</Resource>
+        <Resource>jsc://validate-scope-1.0.js</Resource>
+        <Resource>jsc://validate-token-request-1.0.js</Resource>
+    </Resources>
+</APIProxy>

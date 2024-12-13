@@ -1,0 +1,19 @@
+<APIProxy revision="4" name="simswap-mock">
+    <DisplayName></DisplayName>
+    <Description></Description>
+    <CreatedAt>1707918755921</CreatedAt>
+    <LastModifiedAt>1707918828888</LastModifiedAt>
+    <BasePaths>/simswap-mock</BasePaths>
+    <Policies>
+        <Policy>AMCreditScores</Policy>
+        <Policy>AMSIMCheck</Policy>
+        <Policy>JavaScriptValidateMSISDN</Policy>
+        <Policy>ExtracVariablesMSISDN</Policy>
+    </Policies>
+    <ProxyEndpoints>
+        <ProxyEndpoint>default</ProxyEndpoint>
+    </ProxyEndpoints>
+    <Resources>
+        <Resource>jsc://validate-msisdn-v1.js</Resource>
+    </Resources>
+</APIProxy>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ProxyEndpoint name="default">
+    <PreFlow name="PreFlow">
+        <Request/>
+        <Response/>
+    </PreFlow>
+    <Flows>
+        <Flow name="bc-authorize">
+            <Description/>
+            <Request>
+                <Step>
+                    <Name>validate-request-10js</Name>
+                </Step>
+                <Step>
+                    <Condition>(error_type != null And error_type != "")</Condition>
+                    <Name>RFInvalidBCAuthRequest</Name>
+                </Step>
+                <Step>
+                    <Name>BAExtractClientId</Name>
+                </Step>
+                <Step>
+                    <Name>VKAuthorizeRequest</Name>
+                </Step>
+                <Step>
+                    <Name>AEGetAPIProductScopes</Name>
+                </Step>
+                <Step>
+                    <Name>JSValidateScope</Name>
+                </Step>
+                <Step>
+                    <Condition>(error_type != null And error_type != "")</Condition>
+                    <Name>RFInvalidBCAuthRequest</Name>
+                </Step>
+                <Step>
+                    <Name>AMApigeeAuthRequest</Name>
+                </Step>
+            </Request>
+            <Response>
+                <Step>
+                    <Name>OAuthGenerateAuthorizationCode</Name>
+                </Step>
+                <Step>
+                    <Name>AMAssignBCAuthorizeResponse</Name>
+                </Step>
+            </Response>
+            <Condition>(proxy.pathsuffix MatchesPath "/bc-authorize") and (request.verb = "POST")</Condition>
+        </Flow>
+        <Flow name="token">
+            <Description/>
+            <Request>
+                <Step>
+                    <Name>JSValidateTokenRequest</Name>
+                </Step>
+                <Step>
+                    <Condition>(error_type != null And error_type != "")</Condition>
+                    <Name>RFMissingMandatoryParameters</Name>
+                </Step>
+                <Step>
+                    <Name>AMBCTokenRequest</Name>
+                </Step>
+                <Step>
+                    <Name>OAuthGenerateAccessToken</Name>
+                </Step>
+            </Request>
+            <Response/>
+            <Condition>(proxy.pathsuffix MatchesPath "/token") and (request.verb = "POST")</Condition>
+        </Flow>
+    </Flows>
+    <PostFlow name="PostFlow">
+        <Request/>
+        <Response/>
+    </PostFlow>
+    <HTTPProxyConnection>
+        <BasePath>/openIDConnectCIBA/v1</BasePath>
+    </HTTPProxyConnection>
+    <RouteRule name="noroute"/>
+</ProxyEndpoint>

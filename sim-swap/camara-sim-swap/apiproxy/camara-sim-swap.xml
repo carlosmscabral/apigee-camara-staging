@@ -1,0 +1,18 @@
+<APIProxy revision="2" name="camara-sim-swap">
+    <DisplayName></DisplayName>
+    <Description></Description>
+    <CreatedAt>1734006657983</CreatedAt>
+    <LastModifiedAt>1734006657983</LastModifiedAt>
+    <BasePaths>/camara/sim-swap/v0</BasePaths>
+    <Policies>
+        <Policy>OAuthVerifyAccessToken</Policy>
+        <Policy>EVPhoneNumber</Policy>
+        <Policy>RFMissingPhoneNumber</Policy>
+    </Policies>
+    <ProxyEndpoints>
+        <ProxyEndpoint>default</ProxyEndpoint>
+    </ProxyEndpoints>
+    <TargetEndpoints>
+        <TargetEndpoint>default</TargetEndpoint>
+    </TargetEndpoints>
+</APIProxy>

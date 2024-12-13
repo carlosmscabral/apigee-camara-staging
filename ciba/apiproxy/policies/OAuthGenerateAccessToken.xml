@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<OAuthV2 continueOnError="false" enabled="true" name="OAuthGenerateAccessToken">
+    <DisplayName>OAuth.GenerateAccessToken</DisplayName>
+    <Properties/>
+    <Attributes/>
+    <ExternalAuthorization>false</ExternalAuthorization>
+    <Operation>GenerateAccessToken</Operation>
+    <GrantType>flow.grantType</GrantType>
+    <RedirectUri>flow.redirectURI</RedirectUri>
+    <Code>request.formparam.auth_req_id</Code>
+    <SupportedGrantTypes/>
+    <GenerateResponse enabled="true"/>
+    <RFCCompliantRequestResponse>true</RFCCompliantRequestResponse>
+</OAuthV2>

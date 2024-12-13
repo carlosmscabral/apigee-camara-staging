@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AssignMessage async="false" continueOnError="false" enabled="true" name="AssignMessageRedirectToGoogleLoginPage">
+    <DisplayName>AssignMessage: RedirectToGoogleLoginPage</DisplayName>
+    <Properties/>
+    <Set>
+        <Headers>
+            <Header name="Location">https://accounts.google.com/o/oauth2/auth?client_id=961087104791-150nbmqspvfgadmm7ov6tk72b0fgafu3.apps.googleusercontent.com&amp;scope=email profile&amp;state={request.queryparam.state}&amp;response_type=code&amp;redirect_uri=https://34.117.32.190.nip.io/v2/oauth2/oauthcallback</Header>
+        </Headers>
+        <Payload contentType="text/plain">
+       https://accounts.google.com/o/oauth2/auth?client_id=961087104791-150nbmqspvfgadmm7ov6tk72b0fgafu3.apps.googleusercontent.com&amp;scope=email profile&amp;response_type=code&amp;state={request.queryparam.state}&amp;redirect_uri=https://34.117.32.190.nip.io/v2/oauth2/oauthcallback
+       
+     </Payload>
+        <StatusCode>302</StatusCode>
+        <ReasonPhrase>Login App Redirect</ReasonPhrase>
+    </Set>
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+    <AssignTo createNew="false" transport="http" type="request"/>
+</AssignMessage>

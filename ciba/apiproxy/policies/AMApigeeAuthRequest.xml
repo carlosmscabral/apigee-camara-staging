@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AssignMessage continueOnError="false" enabled="true" name="AMApigeeAuthRequest">
+    <DisplayName>AM.ApigeeAuthRequest</DisplayName>
+    <Properties/>
+    <AssignVariable>
+        <Name>flow.responseType.code</Name>
+        <Value>code</Value>
+    </AssignVariable>
+    <AssignVariable>
+        <Name>flow.redirectURI</Name>
+        <Value>https://localhost</Value>
+    </AssignVariable>
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+    <AssignTo createNew="false" transport="http" type="request"/>
+</AssignMessage>

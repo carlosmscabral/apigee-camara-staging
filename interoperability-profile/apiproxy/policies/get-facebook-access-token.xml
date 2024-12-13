@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ServiceCallout async="false" continueOnError="false" enabled="true" name="get-facebook-access-token">
+    <DisplayName>ServiceCallout: GetGoogleAccessToken</DisplayName>
+    <FaultRules/>
+    <Properties/>
+    <Request clearPayload="true">
+        <Set>
+            <Headers>
+                <Header name="Content-Type">application/x-www-form-urlencoded</Header>
+            </Headers>
+            <FormParams>
+                <FormParam name="client_id">961087104791-150nbmqspvfgadmm7ov6tk72b0fgafu3.apps.googleusercontent.com</FormParam>
+                <FormParam name="client_secret">btz3QPa7cNcPpOl4pTvcCNUA</FormParam>
+                <FormParam name="redirect_uri">https://34.117.32.190.nip.io/v2/oauth2/oauthcallback</FormParam>
+                <FormParam name="code">{request.queryparam.code}</FormParam>
+                <FormParam name="grant_type">authorization_code</FormParam>
+            </FormParams>
+            <Verb>POST</Verb>
+        </Set>
+        <IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
+    </Request>
+    <Response>googleResponse</Response>
+    <HTTPTargetConnection>
+        <Properties/>
+        <URL>https://accounts.google.com/o/oauth2/token</URL>
+    </HTTPTargetConnection>
+</ServiceCallout>
