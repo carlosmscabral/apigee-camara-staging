@@ -33,6 +33,12 @@ if [ -z "$CLIENT_JKWS_URI" ]; then
   echo "No CLIENT_JKWS_URI variable set"
   exit
 fi
+if [ -z "$CIBA_TARGET_SERVER_URI" ]; then
+  echo "No CIBA_TARGET_SERVER_URI variable set"
+  exit
+fi
+
+
 
 echo "Installing apigeecli"
 curl -s https://raw.githubusercontent.com/apigee/apigeecli/main/downloadLatest.sh | bash
@@ -48,6 +54,11 @@ sed -i -E "s/#JWKS_URI_PLACEHOLDER#/${JWKS_URI_VALUE}/g" ./apiproxy/resources/pr
 
 echo "Placeholders updated successfully."
 
+echo "Creating necessary configs..."
+
+echo "Creating CIBA target server..."
+apigeecli targetservers create --wait --name camara-oidc-ciba-backend  --org "$APIGEE_PROJECT_ID" --env "$APIGEE_ENV" --protocol HTTPS --host "$CIBA_TARGET_SERVER_URI" --token "$TOKEN"
+echo "Creation of Target Server done"
 
 echo "Deploying Apigee artifacts..."
 

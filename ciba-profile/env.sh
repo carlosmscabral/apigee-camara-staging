@@ -18,4 +18,5 @@ export APIGEE_PROJECT_ID="APIGEE_PROJECT_ID_TO_SET"
 export APIGEE_HOST="APIGEE_HOST_TO_SET" # such as https://api.mydomain.com - include http/https in the variable
 export APIGEE_ENV="APIGEE_ENV_TO_SET" # such as dev, prod
 export CLIENT_JKWS_URI="CLIENT_JWKS_URI" # URI for the JWKS used for signing client assertions, such as https://token.dev/jwks/keys.json
-export TARGET_SERVER_STUFF # TODO
+export CIBA_TARGET_SERVER_URI="CIBA_TARGET_SERVER_URI" # e.g., consent.com. This URI will be configured as a target server destination after input validation
+                                                       # this backend system, using the login_hint should initiate a consent flow with the user
