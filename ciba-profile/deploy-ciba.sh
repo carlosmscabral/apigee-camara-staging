@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Copyright 2024 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -29,6 +29,11 @@ if [ -z "$APIGEE_HOST" ]; then
   exit
 fi
 
+if [ -z "$CLIENT_JKWS_URI" ]; then
+  echo "No CLIENT_JKWS_URI variable set"
+  exit
+fi
+
 echo "Installing apigeecli"
 curl -s https://raw.githubusercontent.com/apigee/apigeecli/main/downloadLatest.sh | bash
 export PATH=$PATH:$HOME/.apigeecli/bin
@@ -36,15 +41,16 @@ export PATH=$PATH:$HOME/.apigeecli/bin
 TOKEN=$(gcloud auth print-access-token)
 gcloud config set project "$APIGEE_PROJECT_ID"
 
+echo "Updating placeholders..."
+
+sed -i -E "s/#APIGEE_URI_PLACEHOLDER#/${APIGEE_URI_VALUE}/g" ./apiproxy/resources/properties/ciba.properties
+sed -i -E "s/#JWKS_URI_PLACEHOLDER#/${JWKS_URI_VALUE}/g" ./apiproxy/resources/properties/ciba.properties
+
+echo "Placeholders updated successfully."
+
+
 echo "Deploying Apigee artifacts..."
 
-echo "Importing and Deploying Apigee camara-sim-swap-v1 proxy..."
-REV=$(apigeecli apis create bundle -f ./camara-sim-swap/apiproxy -n camara-sim-swap-v1 --org "$APIGEE_PROJECT_ID" --token "$TOKEN" --disable-check | jq ."revision" -r)
-apigeecli apis deploy --wait --name camara-sim-swap-v1 --ovr --rev "$REV" --org "$APIGEE_PROJECT_ID" --env "$APIGEE_ENV" --token "$TOKEN"
-
-echo "Importing and Deploying Apigee mock-sim-swap-v1 proxy..."
-REV=$(apigeecli apis create bundle -f ./mock-sim-swap/apiproxy -n mock-sim-swap-v1 --org "$APIGEE_PROJECT_ID" --token "$TOKEN" --disable-check | jq ."revision" -r)
-apigeecli apis deploy --wait --name mock-sim-swap-v1 --ovr --rev "$REV" --org "$APIGEE_PROJECT_ID" --env "$APIGEE_ENV" --token "$TOKEN"
-
-echo " "
-echo "All the Apigee artifacts are successfully deployed!"
+echo "Importing and Deploying Apigee camara-oidc-ciba-v1 proxy..."
+REV=$(apigeecli apis create bundle -f ./apiproxy -n camara-oidc-ciba-v1 --org "$APIGEE_PROJECT_ID" --token "$TOKEN" --disable-check | jq ."revision" -r)
+apigeecli apis deploy --wait --name camara-oidc-ciba-v1 --ovr --rev "$REV" --org "$APIGEE_PROJECT_ID" --env "$APIGEE_ENV" --token "$TOKEN"
