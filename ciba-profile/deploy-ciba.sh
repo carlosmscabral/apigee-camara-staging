@@ -49,15 +49,26 @@ gcloud config set project "$APIGEE_PROJECT_ID"
 
 echo "Updating placeholders..."
 
-sed -i -E "s/#APIGEE_URI_PLACEHOLDER#/${APIGEE_URI_VALUE}/g" ./apiproxy/resources/properties/ciba.properties
-sed -i -E "s/#JWKS_URI_PLACEHOLDER#/${JWKS_URI_VALUE}/g" ./apiproxy/resources/properties/ciba.properties
+PRE_PROP="# ciba.properties file
+# JWT properties
+issuer=$APIGEE_HOST
+
+#Authorization code properties
+code=code
+
+# token flow properties
+grant_type=authorization_code
+redirect_uri=https://localhost
+jwks_uri=$CLIENT_JKWS_URI"
+
+echo "$PRE_PROP" > ./apiproxy/resources/properties/ciba.properties
 
 echo "Placeholders updated successfully."
 
 echo "Creating necessary configs..."
 
 echo "Creating CIBA target server..."
-apigeecli targetservers create --wait --name camara-oidc-ciba-backend  --org "$APIGEE_PROJECT_ID" --env "$APIGEE_ENV" --protocol HTTPS --host "$CIBA_TARGET_SERVER_URI" --token "$TOKEN"
+apigeecli targetservers create --name camara-oidc-ciba-backend  --org "$APIGEE_PROJECT_ID" --env "$APIGEE_ENV" --tls true --port 443 --host "$CIBA_TARGET_SERVER_URI" --token "$TOKEN"
 echo "Creation of Target Server done"
 
 echo "Deploying Apigee artifacts..."
