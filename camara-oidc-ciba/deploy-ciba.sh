@@ -64,7 +64,7 @@ redirect_uri=https://localhost
 jwks_uri=$CLIENT_JKWS_URI"
 echo "$PRE_PROP" > ./apiproxy/resources/properties/ciba.properties || { echo "Error: Could not update ciba.properties"; exit 1; }
 
-sed -i 's/#PATH_PLACEHOLDER#/"${CIBA_TARGET_SERVER_PATH}"/g' ./apiproxy/targets/default.xml; || { echo "Error: Could not update default.xml"; exit 1; }
+sed -i 's|#PATH_PLACEHOLDER#|'"${CIBA_TARGET_SERVER_PATH}"'|g' ./apiproxy/targets/default.xml || { echo "Error: Could not update default.xml"; exit 1; }
 
 echo "Placeholders updated successfully."
 
