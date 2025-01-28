@@ -1,4 +1,3 @@
-```markdown
 # Apigee Samples for Open Gateway/CAMARA APIs
 
 - [Apigee Samples for Open Gateway/CAMARA APIs](#apigee-samples-for-open-gatewaycamara-apis)
@@ -87,4 +86,3 @@ This is not an officially supported Google product, nor is it part of any offici
 ## Support
 
 For support or assistance, please consult the [Google Cloud Community forum dedicated to Apigee](https://www.googlecloudcommunity.com/gc/Apigee/bd-p/cloud-apigee).
-```
