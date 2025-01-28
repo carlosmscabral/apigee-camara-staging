@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<OAuthV2 name="RefreshAccessToken">
-    <DisplayName>OAuthV2: RefreshAccessToken</DisplayName>
-    <Operation>RefreshAccessToken</Operation>
-    <ExpiresIn>100000000000</ExpiresIn>
-    <GenerateResponse/>
-</OAuthV2>

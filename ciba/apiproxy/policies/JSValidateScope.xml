@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<Javascript continueOnError="false" enabled="true" timeLimit="200" name="JSValidateScope">
-    <DisplayName>JS.ValidateScope</DisplayName>
-    <Properties/>
-    <ResourceURL>jsc://validate-scope-1.0.js</ResourceURL>
-</Javascript>

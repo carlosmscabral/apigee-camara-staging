@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<VerifyAPIKey continueOnError="false" enabled="true" name="VKAuthorizeRequest">
-    <DisplayName>VK.AuthorizeRequest</DisplayName>
-    <Properties/>
-    <APIKey ref="flow.clientId"/>
-</VerifyAPIKey>
