@@ -64,7 +64,7 @@ redirect_uri=https://localhost
 jwks_uri=$CLIENT_JKWS_URI"
 echo "$PRE_PROP" > ./apiproxy/resources/properties/ciba.properties || { echo "Error: Could not update ciba.properties"; exit 1; }
 
-sed -e 's/#PATH_PLACEHOLDER#/"${CIBA_TARGET_SERVER_PATH}"/g' ./apiproxy/targets/default_tmpl.xml > ./apiproxy/targets/default.xml; rm ./apiproxy/targets/default_tmpl.xml || { echo "Error: Could not update default.xml"; exit 1; }
+sed -i 's/#PATH_PLACEHOLDER#/"${CIBA_TARGET_SERVER_PATH}"/g' ./apiproxy/targets/default.xml; || { echo "Error: Could not update default.xml"; exit 1; }
 
 echo "Placeholders updated successfully."
 
@@ -76,7 +76,7 @@ echo "Placeholders updated successfully."
 echo "Creating necessary configs..."
 
 echo "Creating CIBA target server..."
-apigeecli targetservers create --name camara-oidc-ciba-backend  --org "$APIGEE_PROJECT_ID" --env "$APIGEE_ENV" --tls true --port 443 --host "$CIBA_TARGET_SERVER_URI" --token "$TOKEN" || { echo "Error: Could not create target server or it already exists. Proceeding with the setup..."; }
+apigeecli targetservers create --name camara-oidc-ciba  --org "$APIGEE_PROJECT_ID" --env "$APIGEE_ENV" --tls true --port 443 --host "$CIBA_TARGET_SERVER_URI" --token "$TOKEN" || { echo "Error: Could not create target server or it already exists. Proceeding with the setup..."; }
 echo "Creation of Target Server done"
 
 echo "Creating env-scoped KVM and KVM Entry for Private Key..."

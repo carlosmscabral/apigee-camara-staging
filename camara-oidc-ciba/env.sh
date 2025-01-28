@@ -33,7 +33,7 @@ export CLIENT_JKWS_URI="CLIENT_JWKS_URI"
 export CIBA_TARGET_SERVER_URI="CIBA_TARGET_SERVER_URI" 
 
 # Required: Path added to CIBA_TARGET_SERVER_URI (e.g., "/idp/consent").
-#  Can be empty. If using the mock backend, use "/camara-oidc-ciba-bknd-mock".
+#  Can be empty string. If using the mock backend, use "/camara-oidc-ciba-bknd-mock".
 export CIBA_TARGET_SERVER_PATH="/camara-oidc-ciba-bknd-mock" 
 
 # Required: Private Key used by Apigee to sign the final ID token.
