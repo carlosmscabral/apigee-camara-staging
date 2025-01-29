@@ -21,12 +21,7 @@
 
 PRODUCT_NAME=camara-apiproduct-all-apis
 DEVELOPER_NAME=camara-developer
-SCOPES="[
-		"check-sim-swap",
-		"kyc-match:match",
-		"openid",
-		"retrieve-sim-swap-date"
-	]"
+SCOPES="check-sim-swap,kyc-match:match,openid,retrieve-sim-swap-date"
 
 # Check for required environment variables
 check_env_var() {
@@ -40,14 +35,14 @@ check_env_var() {
 create_apiproduct() {
   local product_name=$1
   local ops_file="./configuration-data/camara-ops.json"
-  if apigeecli products get --name "${product_name}" --org "$PROJECT" --token "$TOKEN" --disable-check >>/dev/null 2>&1; then
+  if apigeecli products get --name "${product_name}" --org "$APIGEE_PROJECT_ID" --token "$TOKEN" --disable-check >>/dev/null 2>&1; then
     printf "  The apiproduct %s already exists!\n" "${product_name}"
   else
     [[ ! -f "$ops_file" ]] && printf "missing operations definition file %s\n" "$ops_file" && exit 1
     apigeecli products create --name "${product_name}" --display-name "${product_name}" \
       --opgrp "$ops_file" \
       --envs "$APIGEE_ENV" --approval auto -s "$SCOPES" \
-      --org "$PROJECT" --token "$TOKEN" --disable-check
+      --org "$APIGEE_PROJECT_ID" --token "$TOKEN" --disable-check
   fi
 }
 
@@ -58,13 +53,13 @@ create_app() {
   local KEYPAIR
 
   local NUM_APPS
-  NUM_APPS=$(apigeecli apps get --name "${app_name}" --org "$PROJECT" --token "$TOKEN" --disable-check | jq -r .'| length')
+  NUM_APPS=$(apigeecli apps get --name "${app_name}" --org "$APIGEE_PROJECT_ID" --token "$TOKEN" --disable-check | jq -r .'| length')
   if [[ $NUM_APPS -eq 0 ]]; then
-    mapfile -t KEYPAIR < <(apigeecli apps create --name "${app_name}" --email "${developer}" --prods "${product_name}" --org "$PROJECT" --token "$TOKEN" --disable-check | jq -r ".credentials[0] | .consumerKey,.consumerSecret")
+    mapfile -t KEYPAIR < <(apigeecli apps create --name "${app_name}" --email "${developer}" --prods "${product_name}" --org "$APIGEE_PROJECT_ID" --token "$TOKEN" --disable-check | jq -r ".credentials[0] | .consumerKey,.consumerSecret")
   else
     # must not echo here, it corrupts the return value of the function.
     # printf "  The app %s already exists!\n" ${app_name}
-    mapfile -t KEYPAIR < <(apigeecli apps get --name "${app_name}" --org "$PROJECT" --token "$TOKEN" --disable-check | jq -r ".[0].credentials[0] | .consumerKey,.consumerSecret")
+    mapfile -t KEYPAIR < <(apigeecli apps get --name "${app_name}" --org "$APIGEE_PROJECT_ID" --token "$TOKEN" --disable-check | jq -r ".[0].credentials[0] | .consumerKey,.consumerSecret")
   fi
   echo "${KEYPAIR[@]}"
 }
@@ -96,18 +91,18 @@ create_apiproduct "$PRODUCT_NAME"
 
 DEVELOPER_EMAIL="${DEVELOPER_NAME}@acme.com"
 printf "Creating Developer %s\n" "${DEVELOPER_EMAIL}"
-if apigeecli developers get --email "${DEVELOPER_EMAIL}" --org "$PROJECT" --token "$TOKEN" --disable-check >>/dev/null 2>&1; then
+if apigeecli developers get --email "${DEVELOPER_EMAIL}" --org "$APIGEE_PROJECT_ID" --token "$TOKEN" --disable-check >>/dev/null 2>&1; then
   printf "  The developer already exists.\n"
 else
   apigeecli developers create --user "${DEVELOPER_EMAIL}" --email "${DEVELOPER_EMAIL}" \
     --first Camara --last SampleDeveloper \
-    --org "$PROJECT" --token "$TOKEN" --disable-check
+    --org "$APIGEE_PROJECT_ID" --token "$TOKEN" --disable-check
 fi
 
 
 echo "Checking and possibly Creating Developer App"
 # shellcheck disable=SC2046,SC2162
-IFS=$' ' read -a CLIENT_CREDS <<<$(create_app "${PRODUCT_NAME}-app" "${DEVELOPER_EMAIL}")
+IFS=$' ' read -a CLIENT_CREDS <<<$(create_app "${PRODUCT_NAME}" "${DEVELOPER_EMAIL}")
 
 echo " "
 echo "All the Apigee artifacts are successfully deployed."
