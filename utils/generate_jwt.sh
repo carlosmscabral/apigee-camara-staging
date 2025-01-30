@@ -15,24 +15,6 @@
 # limitations under the License.
 
 
-# --- Configuration ---
-PRIVATE_KEY_FILE="rsa_key.pem"  # Path to your private key
-ISS="daVPgvuYskmuWtieomj1KOm6lVpZTDvTiWQK0BGTIjGHkBFe"                 # Your client ID
-SUB="daVPgvuYskmuWtieomj1KOm6lVpZTDvTiWQK0BGTIjGHkBFe"
-AUD="https://dev.35.227.240.213.nip.io"
-EXPIRY_SECONDS=300                         # JWT expiry (e.g., 5 minutes)
-
-# --- Custom Claims ---
-# Format: CLAIM_NAME="claim_value"
-# Example:
-# CUSTOM_CLAIM_ROLE="admin"
-# CUSTOM_CLAIM_PERMISSIONS="read,write,execute"
-#
-# Add your custom claims below
-CUSTOM_CLAIM_login_hint="+55123456789"
-CUSTOM_CLAIM_comida="picanha"
-# Add more as needed...
-
 
 # --- Function to check if a command exists ---
 command_exists() {
