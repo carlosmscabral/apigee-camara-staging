@@ -22,6 +22,15 @@ command_exists() {
   command -v "$1" >/dev/null 2>&1
 }
 
+# Check for required environment variables
+check_env_var() {
+  var_name="$1"
+  if [ -z "${!var_name}" ]; then
+    echo "Error: Environment variable $var_name is not set."
+    exit 1
+  fi
+}
+
 # --- Check for required tools ---
 if ! command_exists gsutil; then
   echo "Error: gsutil is not installed. Please install the Google Cloud SDK."
@@ -32,6 +41,18 @@ if ! command_exists openssl; then
   echo "Error: openssl is not installed."
   exit 1
 fi
+
+
+check_env_var PROJECT_ID
+check_env_var KEY_FILE_PREFIX
+check_env_var KEY_ID
+check_env_var KEY_SIZE
+check_env_var BUCKET_NAME
+check_env_var LOCATION
+check_env_var JWKS_FILE
+check_env_var GCS_OBJECT_NAME
+
+
 
 # --- Check if the bucket exists ---
 if ! gsutil ls -b "gs://${BUCKET_NAME}" 2>/dev/null; then

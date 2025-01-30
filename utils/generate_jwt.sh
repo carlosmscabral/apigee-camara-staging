@@ -21,6 +21,20 @@ command_exists() {
   command -v "$1" >/dev/null 2>&1
 }
 
+# Check for required environment variables
+check_env_var() {
+  var_name="$1"
+  if [ -z "${!var_name}" ]; then
+    echo "Error: Environment variable $var_name is not set."
+    exit 1
+  fi
+}
+
+# --- Helper function for URL-safe Base64 encoding ---
+base64url() {
+  base64 | tr '+/' '-_' | tr -d '='
+}
+
 # --- Check for required tools ---
 if ! command_exists base64; then
   echo "Error: base64 is not installed. "
@@ -42,10 +56,9 @@ if ! command_exists jq; then
   exit 1
 fi
 
-# --- Helper function for URL-safe Base64 encoding ---
-base64url() {
-  base64 | tr '+/' '-_' | tr -d '='
-}
+check_env_var PRIVATE_KEY_FILE
+check_env_var EXPIRY_SECONDS
+
 
 # --- JWT Header ---
 HEADER=$(echo -n '{"alg":"RS256","typ":"JWT"}' | base64url)
