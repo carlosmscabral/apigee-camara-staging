@@ -54,7 +54,7 @@ create_app() {
 
   local NUM_APPS
   NUM_APPS=$(apigeecli apps get --name "${app_name}" --org "$APIGEE_PROJECT_ID" --token "$TOKEN" --disable-check | jq -r .'| length')
-  if [[ $NUM_APPS <= 1 ]]; then
+  if [[ $NUM_APPS -lt 2 ]]; then
     mapfile -t KEYPAIR < <(apigeecli apps create --name "${app_name}" --email "${developer}" --prods "${product_name}" --org "$APIGEE_PROJECT_ID" --token "$TOKEN" --disable-check | jq -r ".credentials[0] | .consumerKey,.consumerSecret")
   else
     # must not echo here, it corrupts the return value of the function.
