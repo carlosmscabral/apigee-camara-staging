@@ -21,6 +21,7 @@
 
 PRODUCT_NAME=camara-apiproduct-all-apis
 DEVELOPER_NAME=camara-developer
+DEVELOPER_EMAIL="${DEVELOPER_NAME}@acme.com"
 SCOPES="check-sim-swap,kyc-match:match,openid,retrieve-sim-swap-date"
 
 # Check for required environment variables
@@ -89,7 +90,7 @@ echo "Configuring Apigee Artifacts..."
 echo "Creating API Product...."
 create_apiproduct "$PRODUCT_NAME"
 
-DEVELOPER_EMAIL="${DEVELOPER_NAME}@acme.com"
+
 printf "Creating Developer %s\n" "${DEVELOPER_EMAIL}"
 if apigeecli developers get --email "${DEVELOPER_EMAIL}" --org "$APIGEE_PROJECT_ID" --token "$TOKEN" --disable-check >>/dev/null 2>&1; then
   printf "  The developer already exists.\n"
