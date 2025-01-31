@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <ProxyEndpoint name="default">
-  <Description/>
-  <FaultRules/>
+  <Description />
+  <FaultRules />
   <PreFlow name="PreFlow">
     <Request>
       <Step>
@@ -15,15 +15,16 @@
         <Name>RF-InvalidScope</Name>
       </Step>
     </Request>
-    <Response/>
+    <Response />
   </PreFlow>
   <PostFlow name="PostFlow">
-    <Request/>
-    <Response/>
+    <Request />
+    <Response />
   </PostFlow>
   <Flows>
     <Flow name="retrieveSimSwapDate">
-      <Description>Get timestamp of last SIM swap event for a mobile user account provided with phone number.</Description>
+      <Description>Get timestamp of last SIM swap event for a mobile user account provided with
+        phone number.</Description>
       <Request>
         <Step>
           <Name>EV-PhoneNumber</Name>
@@ -33,7 +34,7 @@
           <Name>RF-MissingPhoneNumber</Name>
         </Step>
       </Request>
-      <Response/>
+      <Response />
       <Condition>(proxy.pathsuffix MatchesPath "/retrieve-date") and (request.verb = "POST")</Condition>
     </Flow>
     <Flow name="checkSimSwap">
@@ -47,13 +48,13 @@
           <Name>RF-MissingPhoneNumber</Name>
         </Step>
       </Request>
-      <Response/>
+      <Response />
       <Condition>(proxy.pathsuffix MatchesPath "/check") and (request.verb = "POST")</Condition>
     </Flow>
   </Flows>
   <HTTPProxyConnection>
-    <BasePath>/camara/sim-swap/v0</BasePath>
-    <Properties/>
+    <BasePath>/camara/sim-swap/v1</BasePath>
+    <Properties />
   </HTTPProxyConnection>
   <RouteRule name="default">
     <TargetEndpoint>default</TargetEndpoint>

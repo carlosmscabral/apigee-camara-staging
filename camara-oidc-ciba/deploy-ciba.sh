@@ -33,6 +33,7 @@ check_env_var APIGEE_ENV
 check_env_var APIGEE_HOST
 check_env_var CLIENT_JKWS_URI
 check_env_var CIBA_TARGET_SERVER_URI
+check_env_var CIBA_TARGET_SERVER_PATH
 check_env_var PRIVATE_KEY
 check_env_var USE_MOCK
 
