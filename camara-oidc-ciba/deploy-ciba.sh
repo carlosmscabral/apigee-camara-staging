@@ -54,6 +54,7 @@ echo "Updating placeholders..."
 PRE_PROP="# ciba.properties file
 # JWT properties
 issuer=$APIGEE_HOST
+expiry=8h
 
 #Authorization code properties
 code=code
