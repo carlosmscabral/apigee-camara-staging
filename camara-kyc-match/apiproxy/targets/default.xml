@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <TargetEndpoint name="default">
-  <Description/>
-  <FaultRules/>
+  <Description />
+  <FaultRules />
   <PreFlow name="PreFlow">
-    <Request/>
-    <Response/>
+    <Request />
+    <Response />
   </PreFlow>
   <PostFlow name="PostFlow">
-    <Request/>
-    <Response/>
+    <Request />
+    <Response />
   </PostFlow>
-  <Flows/>
+  <Flows />
   <HTTPTargetConnection>
-    <Properties/>
+    <Properties />
     <LoadBalancer>
-      <Server name="camara-kyc-match"/>
+      <Server name="camara-kyc-match" />
     </LoadBalancer>
-    <Path>/match-mock</Path>
+    <Path>/#PATH_PLACEHOLDER#</Path>
   </HTTPTargetConnection>
 </TargetEndpoint>

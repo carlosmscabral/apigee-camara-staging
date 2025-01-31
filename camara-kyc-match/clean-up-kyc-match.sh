@@ -19,7 +19,9 @@
 # Pre-Setup: Environment Checks and Tool Installation
 # ==============================================================================
 
-PROXY_NAME=camara-oidc-v1
+PROXY_NAME=camara-kyc-match-v1
+# MOCK_PROXY_NAME=camara-kyc-match-mock-backend-v1
+TARGET_SERVER_NAME=camara-kyc-match
 
 # Check for required environment variables
 check_env_var() {
@@ -32,7 +34,7 @@ check_env_var() {
 
 check_env_var APIGEE_PROJECT_ID
 check_env_var APIGEE_ENV
-
+# check_env_var USE_MOCK
 
 echo "Installing apigeecli..."
 curl -s https://raw.githubusercontent.com/apigee/apigeecli/main/downloadLatest.sh | bash
@@ -53,5 +55,18 @@ apigeecli apis undeploy --name ${PROXY_NAME} --env "$APIGEE_ENV" --rev "$REV" --
 
 echo "Deleting proxy ${PROXY_NAME} proxy"
 apigeecli apis delete --name ${PROXY_NAME} --org "$APIGEE_PROJECT_ID" --token "$TOKEN"
+
+# if [[ "$USE_MOCK" == "true" ]]; then
+#   echo "Using mock backend. Undeploying camara-oidc-ciba-mock-backend-v1 proxy"
+#   REV=$(apigeecli envs deployments get --env "$APIGEE_ENV" --org "$APIGEE_PROJECT_ID" --token "$TOKEN" --disable-check | jq .'deployments[]| select(.apiProxy=="camara-oidc-ciba-mock-backend-v1").revision' -r)
+#   apigeecli apis undeploy --name camara-oidc-ciba-mock-backend-v1 --env "$APIGEE_ENV" --rev "$REV" --org "$APIGEE_PROJECT_ID" --token "$TOKEN"
+
+#   echo "Deleting proxy camara-oidc-ciba-mock-backend-v1 proxy"
+#   apigeecli apis delete --name camara-oidc-ciba-mock-backend-v1 --org "$APIGEE_PROJECT_ID" --token "$TOKEN"
+# fi
+
+
+echo "Deleting ${TARGET_SERVER_NAME} target server..."
+apigeecli targetservers delete --name ${TARGET_SERVER_NAME}  --org "$APIGEE_PROJECT_ID" --env "$APIGEE_ENV" --token "$TOKEN" || { echo "Error: Could not delete target server. Proceeding with the setup..."; }
 
 echo "Undeployment finalized!"

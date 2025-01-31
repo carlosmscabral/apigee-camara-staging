@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <ProxyEndpoint name="default">
-  <Description/>
-  <FaultRules/>
+  <Description />
+  <FaultRules />
   <PreFlow name="PreFlow">
-    <Request/>
-    <Response/>
+    <Request />
+    <Response />
   </PreFlow>
   <PostFlow name="PostFlow">
-    <Request/>
-    <Response/>
+    <Request />
+    <Response />
   </PostFlow>
   <Flows>
     <Flow name="authorize">
-      <Description/>
+      <Description />
       <Request>
         <Step>
           <Name>JS-ValidateAuthorizeRequest</Name>
@@ -50,7 +50,7 @@
       <Condition>(proxy.pathsuffix MatchesPath "/authorize") and (request.verb = "GET")</Condition>
     </Flow>
     <Flow name="token">
-      <Description/>
+      <Description />
       <Request>
         <Step>
           <Name>JS-ValidateTokenRequest</Name>
@@ -90,8 +90,8 @@
       <Condition>(proxy.pathsuffix MatchesPath "/token") and (request.verb = "POST")</Condition>
     </Flow>
     <Flow name="consent">
-      <Description/>
-      <Request/>
+      <Description />
+      <Request />
       <Response>
         <Step>
           <Name>AM-SetConsentPage</Name>
@@ -100,28 +100,28 @@
       <Condition>(proxy.pathsuffix MatchesPath "/consent") and (request.verb = "POST")</Condition>
     </Flow>
     <Flow name="confirm">
-      <Description/>
+      <Description />
       <Request>
         <Step>
           <Name>OAuthV2-GenerateAuthorizationCode</Name>
         </Step>
       </Request>
-      <Response/>
+      <Response />
       <Condition>(proxy.pathsuffix MatchesPath "/confirm") and (request.verb = "POST")</Condition>
     </Flow>
     <Flow name="DefaultFlow">
-      <Description/>
+      <Description />
       <Request>
         <Step>
           <Name>RF-OperationUnavailable</Name>
         </Step>
       </Request>
-      <Response/>
+      <Response />
     </Flow>
   </Flows>
   <HTTPProxyConnection>
-    <BasePath>/v1/oidc</BasePath>
-    <Properties/>
+    <BasePath>/camara/openIDConnectCore/v1</BasePath>
+    <Properties />
   </HTTPProxyConnection>
-  <RouteRule name="default"/>
+  <RouteRule name="default" />
 </ProxyEndpoint>
