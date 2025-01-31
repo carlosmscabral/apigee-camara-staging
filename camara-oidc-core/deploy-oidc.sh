@@ -19,9 +19,7 @@
 # Pre-Setup: Environment Checks and Tool Installation
 # ==============================================================================
 
-PROXY_NAME=camara-sim-swap-v1
-# MOCK_PROXY_NAME=camara-sim-swap-mock-backend-v1
-TARGET_SERVER_NAME=camara-sim-swap
+PROXY_NAME=camara-oidc-v1
 
 # Check for required environment variables
 check_env_var() {
@@ -34,7 +32,7 @@ check_env_var() {
 
 check_env_var APIGEE_PROJECT_ID
 check_env_var APIGEE_ENV
-# check_env_var USE_MOCK
+check_env_var APIGEE_HOST
 
 echo "Installing apigeecli..."
 curl -s https://raw.githubusercontent.com/apigee/apigeecli/main/downloadLatest.sh | bash
@@ -46,27 +44,31 @@ gcloud config set project "$APIGEE_PROJECT_ID" || { echo "Error: Could not set G
 
 
 # ==============================================================================
-# DELETE Actions
+# Placeholder Updates
 # ==============================================================================
 
-echo "Undeploying ${PROXY_NAME} proxy"
-REV=$(apigeecli envs deployments get --env "$APIGEE_ENV" --org "$APIGEE_PROJECT_ID" --token "$TOKEN" --disable-check | jq --arg proxy_name "$PROXY_NAME" '.deployments[] | select(.apiProxy == $proxy_name).revision' -r)
-apigeecli apis undeploy --name ${PROXY_NAME} --env "$APIGEE_ENV" --rev "$REV" --org "$APIGEE_PROJECT_ID" --token "$TOKEN"
+echo "Updating placeholders..."
 
-echo "Deleting proxy ${PROXY_NAME} proxy"
-apigeecli apis delete --name ${PROXY_NAME} --org "$APIGEE_PROJECT_ID" --token "$TOKEN"
+PRE_PROP="# ciba.properties file
+# JWT properties
+issuer=$APIGEE_HOST
+expiry=8h
 
-# if [[ "$USE_MOCK" == "true" ]]; then
-#   echo "Using mock backend. Undeploying camara-oidc-ciba-mock-backend-v1 proxy"
-#   REV=$(apigeecli envs deployments get --env "$APIGEE_ENV" --org "$APIGEE_PROJECT_ID" --token "$TOKEN" --disable-check | jq .'deployments[]| select(.apiProxy=="camara-oidc-ciba-mock-backend-v1").revision' -r)
-#   apigeecli apis undeploy --name camara-oidc-ciba-mock-backend-v1 --env "$APIGEE_ENV" --rev "$REV" --org "$APIGEE_PROJECT_ID" --token "$TOKEN"
+echo "$PRE_PROP" > ./apiproxy/resources/properties/oidc.properties || { echo "Error: Could not update properties"; exit 1; }
 
-#   echo "Deleting proxy camara-oidc-ciba-mock-backend-v1 proxy"
-#   apigeecli apis delete --name camara-oidc-ciba-mock-backend-v1 --org "$APIGEE_PROJECT_ID" --token "$TOKEN"
-# fi
+echo "Placeholders updated successfully."
 
 
-echo "Deleting ${TARGET_SERVER_NAME} target server..."
-apigeecli targetservers delete --name ${TARGET_SERVER_NAME}  --org "$APIGEE_PROJECT_ID" --env "$APIGEE_ENV" --token "$TOKEN" || { echo "Error: Could not delete target server. Proceeding with the setup..."; }
 
-echo "Undeployment finalized!"
+# ==============================================================================
+# Apigee Proxy Setup and Deployment
+# ==============================================================================
+
+echo "Deploying Apigee artifacts..."
+
+echo "Importing and Deploying Apigee ${PROXY_NAME} proxy..."
+REV=$(apigeecli apis create bundle -f ./apiproxy -n ${PROXY_NAME} --org "$APIGEE_PROJECT_ID" --token "$TOKEN" --disable-check | jq ."revision" -r) || { echo "Error: Could not create Apigee proxy bundle. Output: $REV"; exit 1; }
+apigeecli apis deploy --wait --name ${PROXY_NAME} --ovr --rev "$REV" --org "$APIGEE_PROJECT_ID" --env "$APIGEE_ENV" --token "$TOKEN" || { echo "Error: Could not deploy Apigee proxy."; exit 1; }
+
+
+echo "Deployment successful!"

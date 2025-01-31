@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<APIProxy revision="22" name="camara-oidc-core">
-  <DisplayName/>
-  <Description/>
+<APIProxy revision="22" name="camara-oidc-core-v1">
+  <DisplayName />
+  <Description />
   <CreatedAt>1738084567335</CreatedAt>
   <LastModifiedAt>1738084567335</LastModifiedAt>
-  <BasePaths>/v1/oidc</BasePaths>
+  <BasePaths>/camara/openIDConnectCore/v1</BasePaths>
   <Policies>
     <Policy>JS-ValidateAuthorizeRequest</Policy>
     <Policy>RF-InvalidAuthZRequest</Policy>
