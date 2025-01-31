@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<APIProxy revision="1" name="camara-oidc-ciba">
+<APIProxy revision="1" name="camara-oidc-ciba-v1">
   <DisplayName />
   <Description />
   <CreatedAt>1738075488951</CreatedAt>
