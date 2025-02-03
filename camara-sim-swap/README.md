@@ -1,4 +1,4 @@
-# CAMARA Sim Swap API
+# CAMARA SIM Swap API
 
 This sample proxy creates an implementation of the [CAMARA SimSwap API](https://github.com/camaraproject/SimSwap). It validates the expected parameters as per the spec, validates the provided access token (to be retrieved using one of the supported CAMARA Authorization flows) and also validates the required scopes for each of the API operations. Descriptive errors are also created in scenarios where scopes don't match, parameters (such as phone number) are invalid and so on.
 
