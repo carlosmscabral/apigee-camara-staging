@@ -31,7 +31,7 @@ check_env_var() {
 check_env_var APIGEE_PROJECT_ID
 check_env_var APIGEE_ENV
 check_env_var APIGEE_HOST
-check_env_var CLIENT_JKWS_URI
+check_env_var CLIENT_JWKS_URI
 check_env_var CIBA_TARGET_SERVER_URI
 check_env_var CIBA_TARGET_SERVER_PATH
 check_env_var PRIVATE_KEY
@@ -63,7 +63,7 @@ code=code
 # token flow properties
 grant_type=authorization_code
 redirect_uri=https://localhost
-jwks_uri=$CLIENT_JKWS_URI"
+jwks_uri=$CLIENT_JWKS_URI"
 echo "$PRE_PROP" > ./apiproxy/resources/properties/ciba.properties || { echo "Error: Could not update ciba.properties"; exit 1; }
 
 sed -i 's|#PATH_PLACEHOLDER#|'"${CIBA_TARGET_SERVER_PATH}"'|g' ./apiproxy/targets/default.xml || { echo "Error: Could not update default.xml"; exit 1; }

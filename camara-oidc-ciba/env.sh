@@ -25,7 +25,7 @@ export APIGEE_ENV="APIGEE_ENV_TO_SET"
 
 # Required: URI for the JWKS used to sign client assertions 
 # (e.g., https://token.dev/jwks/keys.json).
-export CLIENT_JKWS_URI="CLIENT_JWKS_URI" 
+export CLIENT_JWKS_URI="CLIENT_JWKS_URI" 
 
 # Required: Target Server URI for CIBA requests (e.g., "consent.com").
 #  "https://" will be prepended.  Use the same value as APIGEE_HOST 
