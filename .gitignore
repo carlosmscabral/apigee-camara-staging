@@ -1,6 +1,5 @@
 # Ignore .pem files
 *.pem
-
 **/node_modules/**
 **/generated/**
 **/megalinter-reports/**
