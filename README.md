@@ -72,7 +72,7 @@ For more information on how to contribute, please read the [guidelines](./CONTRI
 
 ## License
 
-All solutions within this repository are licensed under the [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) license. See the [LICENSE](./LICENSE.txt) file for the full terms and conditions.
+All solutions within this repository are licensed under the [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) license. See the [LICENSE](./LICENSE) file for the full terms and conditions.
 
 ## Not Google Product Clause
 
