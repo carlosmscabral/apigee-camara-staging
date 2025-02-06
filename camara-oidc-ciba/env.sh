@@ -37,7 +37,7 @@ export CIBA_TARGET_SERVER_URI="CIBA_TARGET_SERVER_URI"
 export CIBA_TARGET_SERVER_PATH="/camara-oidc-ciba-bknd-mock" 
 
 # Required: Private Key used by Apigee to sign the final ID token.
-# Format: "-----BEGIN PRIVATE KEY-----\nKEYHERE\n-----END PRIVATE KEY-----"
+# Format: "PEM FORMAT"
 export PRIVATE_KEY="" 
 
 # Required: Use mock backend? ("true" or "false").
