@@ -32,6 +32,10 @@ sfExclusions=(
 echo "Running using Apigeelint version - $(apigeelint --version)"
 echo ""
 
+# Enable nullglob: If a glob pattern matches nothing, it expands to nothing
+# rather than itself.  This is CRUCIAL for handling cases where no directories match.
+shopt -s nullglob
+
 # For API Proxies
 # for proxyDir in "$PWD"/*/apiproxy "$PWD"/*/*/apiproxy "$PWD"/*/*/*/apiproxy; do
  for proxyDir in "$PWD"/*/apiproxy "$PWD"/*/*/apiproxy; do
@@ -51,15 +55,17 @@ done
 
 # For Sharedflows
 for sfDir in "$PWD"/*/sharedflowbundle "$PWD"/*/*/sharedflowbundle; do
-  skip=false
-  for excl in "${sfExclusions[@]}"; do
-    if [[ $sfDir == *"$excl"* ]]; then
-      skip=true
+  if [[ -d "$sfDir" ]]; then
+    skip=false
+    for excl in "${sfExclusions[@]}"; do
+      if [[ $sfDir == *"$excl"* ]]; then
+        skip=true
+      fi
+    done
+    if [[ $skip = false ]]; then
+      echo "Running apigeelint on $sfDir"
+      apigeelint -s "$sfDir" -f table.js -e PO013,PO025,BN003 --profile apigeex
     fi
-  done
-  if [[ $skip = false ]]; then
-    echo "Running apigeelint on $sfDir"
-    apigeelint -s "$sfDir" -f table.js -e PO013,PO025,BN003 --profile apigeex
   fi
 done
 
