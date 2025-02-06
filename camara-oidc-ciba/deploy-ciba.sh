@@ -84,7 +84,7 @@ echo "Creation of Target Server done"
 echo "Creating env-scoped KVM and KVM Entry for Private Key..."
 apigeecli kvms create --name camara-oidc-ciba  --org "$APIGEE_PROJECT_ID" --env "$APIGEE_ENV"  --token "$TOKEN" || { echo "Error: Could not create KVM or it already exists. Proceeding with the setup..."; }
 
-if [[ apigeecli kvms entries create -m camara-oidc-ciba -k "id_token_private_key" --value "${PRIVATE_KEY}" --org "$APIGEE_PROJECT_ID" --env "$APIGEE_ENV"  --token "$TOKEN" ]]
+if apigeecli kvms entries create -m camara-oidc-ciba -k "id_token_private_key" --value "${PRIVATE_KEY}" --org "$APIGEE_PROJECT_ID" --env "$APIGEE_ENV"  --token "$TOKEN" 
 then 
  echo "KVM Entry created successfully" 
 else 
