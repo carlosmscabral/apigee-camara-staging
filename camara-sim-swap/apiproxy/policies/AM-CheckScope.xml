@@ -14,6 +14,16 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 -->
-<Javascript continueOnError="false" enabled="true" timeLimit="200" name="JS-VerifyScope">
-  <ResourceURL>jsc://verify-scope-1.0.js</ResourceURL>
-</Javascript>
+<AssignMessage continueOnError="false" enabled="true" name="AM-CheckScope">
+  <Properties/>
+  <AssignVariable>
+    <Name>flow.expectedOperationScope</Name>
+    <Ref>propertyset.simswap.check</Ref>
+  </AssignVariable>
+  <AssignVariable>
+    <Name>flow.expectedGlobalScope</Name>
+    <Ref>propertyset.simswap.sim-swap</Ref>
+  </AssignVariable>
+  <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+  <AssignTo createNew="false" transport="http" type="request"/>
+</AssignMessage>
