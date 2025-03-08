@@ -14,6 +14,4 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 -->
-<Javascript continueOnError="false" enabled="true" timeLimit="200" name="JS-VerifyScope">
-  <ResourceURL>jsc://verify-scope-1.0.js</ResourceURL>
-</Javascript>
+<APIProxy revision="1" name="camara-sim-swap-v1"/>

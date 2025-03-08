@@ -15,8 +15,6 @@
  limitations under the License.
 -->
 <ExtractVariables continueOnError="false" enabled="true" name="EV-PhoneNumber">
-  <DisplayName>EV-PhoneNumber</DisplayName>
-  <Properties/>
   <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
   <JSONPayload>
     <Variable name="phoneNumber">

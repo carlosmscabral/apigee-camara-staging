@@ -15,13 +15,8 @@
  limitations under the License.
 -->
 <OAuthV2 continueOnError="false" enabled="true" name="OAuthVerifyAccessToken">
-  <DisplayName>OAuth.VerifyAccessToken</DisplayName>
-  <Properties/>
-  <Attributes/>
   <ExternalAuthorization>false</ExternalAuthorization>
   <Operation>VerifyAccessToken</Operation>
-  <SupportedGrantTypes/>
   <GenerateResponse enabled="true"/>
-  <Tokens/>
   <RFCCompliantRequestResponse>true</RFCCompliantRequestResponse>
 </OAuthV2>

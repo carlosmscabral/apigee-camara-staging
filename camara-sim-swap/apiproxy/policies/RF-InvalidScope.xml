@@ -15,8 +15,6 @@
  limitations under the License.
 -->
 <RaiseFault continueOnError="false" enabled="true" name="RF-InvalidScope">
-  <DisplayName>RF-InvalidScope</DisplayName>
-  <Properties/>
   <FaultResponse>
     <Set>
       <Headers/>

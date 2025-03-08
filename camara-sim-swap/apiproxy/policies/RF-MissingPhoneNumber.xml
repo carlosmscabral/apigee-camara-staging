@@ -15,8 +15,6 @@
  limitations under the License.
 -->
 <RaiseFault continueOnError="false" enabled="true" name="RF-MissingPhoneNumber">
-  <DisplayName>RF-MissingPhoneNumber</DisplayName>
-  <Properties/>
   <FaultResponse>
     <Set>
       <Headers/>
