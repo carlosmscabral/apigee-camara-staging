@@ -1,3 +1,5 @@
+> # ⚠️ Note: This repository is no longer maintained. The project has moved [here](https://github.com/apigee/camara-accelerators/)
+
 # Apigee Samples for Open Gateway/CAMARA APIs
 
 - [Apigee Samples for Open Gateway/CAMARA APIs](#apigee-samples-for-open-gatewaycamara-apis)
